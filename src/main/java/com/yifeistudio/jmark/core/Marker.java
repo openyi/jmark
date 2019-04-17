@@ -8,4 +8,5 @@ public interface Marker {
      */
     void mark(String text);
 
+
 }
