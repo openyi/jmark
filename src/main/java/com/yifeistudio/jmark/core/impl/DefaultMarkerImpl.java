@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.yifeistudio.jmark.core.util.AssertUtil.NOT_NULL;
+
 public class DefaultMarkerImpl implements DefaultMarker {
 
     private String filePath;
@@ -27,6 +29,7 @@ public class DefaultMarkerImpl implements DefaultMarker {
     private PDDocument document;
 
     private DefaultMarkerImpl(String filePath) {
+        NOT_NULL(filePath, "file path is null.");
         this.filePath = filePath;
         try {
             document = PDDocument.load(new File(filePath));
