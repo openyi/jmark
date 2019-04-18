@@ -24,6 +24,8 @@ public class PDFBoxTests {
                 String markText = "Some sample text";
                 PDFont font = PDType1Font.HELVETICA_OBLIQUE;
                 float fontSize = 50.0f;
+
+
                 PDExtendedGraphicsState r0 = new PDExtendedGraphicsState();
                 r0.setNonStrokingAlphaConstant(0.2f);
                 r0.setAlphaSourceFlag(true);
@@ -38,6 +40,9 @@ public class PDFBoxTests {
                     contentStream.showText(markText);
                     contentStream.endText();
                 }
+
+
+
             }
             doc.save("filepath.pdf");
         }
