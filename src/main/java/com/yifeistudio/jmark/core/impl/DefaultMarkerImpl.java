@@ -18,11 +18,11 @@ import static com.yifeistudio.jmark.core.util.AssertUtil.NOT_NULL;
 public class DefaultMarkerImpl implements DefaultMarker {
 
     private String filePath;
-    private PDFont markFont = PDType1Font.HELVETICA_OBLIQUE;
-    private Float fontSize = 50.0f;
+    private PDFont markFont;
+    private Float fontSize;
     private Float transparent;
     private String outputPath;
-    private int r = 200;
+    private int r;
     private int g;
     private int b;
 
@@ -70,14 +70,18 @@ public class DefaultMarkerImpl implements DefaultMarker {
         }
     }
 
+    public static MarkBuilder builder() {
+        return new MarkBuilder();
+    }
+
     public static class MarkBuilder {
 
         private String filePath;
-        private PDFont markFont;
-        private Float fontSize;
-        private Float transparent;
+        private PDFont markFont = PDType1Font.HELVETICA_OBLIQUE;
+        private Float fontSize = 50.0f;
+        private Float transparent  = 0.2f;
         private String outputPath;
-        private int red;
+        private int red = 200;
         private int green;
         private int blue;
 
@@ -109,6 +113,7 @@ public class DefaultMarkerImpl implements DefaultMarker {
         }
 
         public MarkBuilder outputPath(String outputPath) {
+            NOT_NULL(outputPath, "output file path is null.");
             this.outputPath = outputPath;
             return this;
         }

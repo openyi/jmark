@@ -8,6 +8,11 @@ public class DefaultMarkerTests {
 
     @Test
     public void loadFileTest() {
-        DefaultMarker defaultMarker = new DefaultMarkerImpl("/home/yi/Downloads/Packt.Learning.Aurelia.2016.12.pdf");
+        DefaultMarker defaultMarker = DefaultMarkerImpl.builder()
+                .filePath("/home/yi/Downloads/Packt.Learning.Aurelia.2016.12.pdf")
+                .outputPath("/home/yi/Desktop/xxx.pdf")
+                .build();
+        defaultMarker.mark("机密文件");
+
     }
 }
