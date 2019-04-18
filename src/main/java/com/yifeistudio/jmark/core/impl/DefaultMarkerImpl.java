@@ -16,8 +16,8 @@ import java.util.Optional;
 public class DefaultMarkerImpl implements DefaultMarker {
 
     private String filePath;
-    private PDFont markFont;
-    private Float fontSize;
+    private PDFont markFont = PDType1Font.HELVETICA_OBLIQUE;
+    private Float fontSize = 50.0f;
     private Float transparent;
     private String outputPath;
     private int r = 200;
@@ -26,7 +26,7 @@ public class DefaultMarkerImpl implements DefaultMarker {
 
     private PDDocument document;
 
-    public DefaultMarkerImpl(String filePath) {
+    private DefaultMarkerImpl(String filePath) {
         this.filePath = filePath;
         try {
             document = PDDocument.load(new File(filePath));
@@ -42,11 +42,12 @@ public class DefaultMarkerImpl implements DefaultMarker {
         r0.setNonStrokingAlphaConstant(transparent);
         r0.setAlphaSourceFlag(true);
         for (PDPage page : document.getPages()) {
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true, true)) {
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page,
+                    PDPageContentStream.AppendMode.APPEND, true, true)) {
                 contentStream.setGraphicsStateParameters(r0);
                 contentStream.setNonStrokingColor(r, g, b);
                 contentStream.beginText();
-                contentStream.setFont(Optional.ofNullable(markFont).orElse(PDType1Font.HELVETICA_OBLIQUE), Optional.ofNullable(fontSize).orElse(50.0f));
+                contentStream.setFont(markFont, fontSize);
                 contentStream.setTextMatrix(Matrix.getRotateInstance(20, 350f, 490f));
                 contentStream.showText(text);
                 contentStream.endText();
